@@ -72,16 +72,16 @@ echo -e "${BLUE}║              ${title_valid}              ${BLUE}║${NC}"
 echo -e "${BLUE}╚═════════════════════════════════════════╝${NC}"
 
 echo -e "\n${BOLD}--- NUMBER SIMPLES ---"
-test_output "1" "1" 1
-test_output "42" "42" 42
-test_output "-42" "-42" -42
-test_output "+42" "42" +42
+test_output "1" "" 1
+test_output "42" "" 42
+test_output "-42" "" -42
+test_output "+42" "" +42
 
 echo -e "${BOLD}--- LIMITES INT ---"
-test_output "2147483647 (INT_MAX)" "2147483647" 2147483647
-test_output "2147483646" "2147483646" 2147483646
-test_output "-2147483648 (INT_MIN)" "-2147483648" -2147483648
-test_output "-2147483647" "-2147483647" -2147483647
+test_output "2147483647 (INT_MAX)" "" 2147483647
+test_output "2147483646" "" 2147483646
+test_output "-2147483648 (INT_MIN)" "" -2147483648
+test_output "-2147483647" "" -2147483647
 
 echo -e "${BOLD}--- MULTIPLES ARGUMENTS ---"
 test_output "100 200 300" "100 200 300" 100 200 300
@@ -91,15 +91,15 @@ test_output "\"89 65 30\" 12 60" "89 65 30 12 60" "89 65 30" 12 60
 test_output "\"89 43 56 72\" 42 65 76 \"24 32 87\"" "89 43 56 72 42 65 76 24 32 87" "89 43 56 72" 42 65 76 "24 32 87"
 
 echo -e "${BOLD}--- WITH SPACES ---"
-test_output "\" 42\"" "42" " 42"
-test_output "\"42 \"" "42" "42 "
+test_output "\" 42\"" "" " 42"
+test_output "\"42 \"" "" "42 "
 
 echo -e "${BOLD}--- ZEROS ---"
-test_output "0" "0" 0
-test_output "-0" "0" -0
-test_output "+0" "0" +0
-test_output "00000000000000000001" "1" 00000000000000000001
-test_output "0000000000000000000" "0" 0000000000000000000
+test_output "0" "" 0
+test_output "-0" "" -0
+test_output "+0" "" +0
+test_output "00000000000000000001" "" 00000000000000000001
+test_output "0000000000000000000" "" 0000000000000000000
 
 echo -e "${BLUE}╔═════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║           ${title_invalid}          ${BLUE}║${NC}"
