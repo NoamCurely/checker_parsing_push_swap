@@ -89,6 +89,7 @@ test_output "-200 +300" "-200 300" -200 +300
 test_output "\"1 2 3 4 5\"" "1 2 3 4 5" "1 2 3 4 5"
 test_output "\"89 65 30\" 12 60" "89 65 30 12 60" "89 65 30" 12 60
 test_output "\"89 43 56 72\" 42 65 76 \"24 32 87\"" "89 43 56 72 42 65 76 24 32 87" "89 43 56 72" 42 65 76 "24 32 87"
+test_output "87 5589 \"     0 9 554   \" 89" "87 5589 0 9 554 89" 87 5589 "     0 9 554   " 89
 
 echo -e "${BOLD}--- WITH SPACES ---"
 test_output "\" 42\"" "" " 42"
@@ -100,6 +101,7 @@ test_output "-0" "" -0
 test_output "+0" "" +0
 test_output "00000000000000000001" "" 00000000000000000001
 test_output "0000000000000000000" "" 0000000000000000000
+test_output "00000000000000000000000000 -00000000000000000000000000001 000000000000000000000002 03" "0 -1 2 3" "00000000000000000000000000 -00000000000000000000000000001 000000000000000000000002 03"
 
 echo -e "${BLUE}╔═════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║           ${title_invalid}          ${BLUE}║${NC}"
@@ -110,7 +112,10 @@ test_output "2147483648 (INT_MAX+1)" "Error" 2147483648
 test_output "-2147483649 (INT_MIN-1)" "Error" -2147483649
 test_output "21474836489999 (INT_MAX+9999)" "Error" 21474836489999
 test_output "9999999999" "Error" 9999999999
+test_output "10000000000002" "Error" 10000000000002
 test_output "2147483648 (INT_MAX+1)" "Error" 2147483648
+test_output "9223372036854775808" "Error" 9223372036854775808
+test_output "-9223372036854775809" "Error" -9223372036854775809
 
 echo -e "${BOLD}--- DUPLICATES ---"
 test_output "42 42" "Error" 42 42
@@ -129,10 +134,13 @@ test_output "42.5" "Error" 42.5
 test_output "42,5" "Error" 42,5
 
 echo -e "${BOLD}--- MISPLACED SIGNS ---"
+test_output "+-0" "Error" "+-0"
+test_output "-+42 1" "Error" -+42 1
 test_output "1+2" "Error" 1+2
 test_output "42+42" "Error" 42+42
 test_output "42-42" "Error" 42-42
 test_output "\"76 87\"+34" "Error" "76 87"+34
+test_output "\"42         +\"" "Error" "42         +"
 test_output "+" "Error" +
 test_output "-" "Error" -
 
